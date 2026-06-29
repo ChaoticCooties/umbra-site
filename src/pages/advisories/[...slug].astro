@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const advisories = (await getCollection('advisories')).filter(
+    (entry) => entry.data.status === 'Disclosed'
+  );
+  return advisories.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+type Props = { entry: CollectionEntry<'advisories'> };
+const { entry } = Astro.props as Props;
+const d = entry.data;
+const { Content } = await entry.render();
+const fmt = (x: Date) => x.toISOString().slice(0, 10);
+const recordId = d.cve ?? `UMB-${fmt(d.date).replaceAll('-', '')}-${entry.slug.toUpperCase()}`;
+const severityClass = d.severity.toLowerCase();
+---
+
+<Base title={`${d.vendor}${d.product ? ' ' + d.product : ''} — ${d.class}`} description={d.summary}>
+  <article class={`advisory-record severity-${severityClass}`}>
+    <header class="wrap dossier-hero">
+      <div class="record-register" aria-label="Advisory record identifier">
+        <span>UMBRA / DISCLOSURE RECORD</span>
+        <i aria-hidden="true"></i>
+        <span>{recordId}</span>
+      </div>
+
+      <div class="dossier-title-grid">
+        <div class="dossier-title">
+          <p class="dossier-kicker">Independent security research / coordinated disclosure</p>
+          <h1>{d.title}</h1>
+          <p class="advisory-abstract">{d.summary}</p>
+        </div>
+
+        <div class="status-stamp" aria-label={`Disclosure status: ${d.status}`}>
+          <span>Record status</span>
+          <strong>{d.status}</strong>
+          <small>{fmt(d.date)}</small>
+        </div>
+      </div>
+
+      <dl class="dossier-meta">
+        <div>
+          <dt>Target</dt>
+          <dd>{d.vendor}{d.product ? ` / ${d.product}` : ''}</dd>
+        </div>
+        <div>
+          <dt>Vulnerability class</dt>
+          <dd>{d.class}</dd>
+        </div>
+        <div>
+          <dt>Severity</dt>
+          <dd><span class={`severity-signal ${d.severity}`}></span>{d.severity}</dd>
+        </div>
+        <div>
+          <dt>Identifier</dt>
+          <dd>{d.cve ?? 'Pending assignment'}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <div class="wrap advisory-body-grid">
+      <aside class="case-file" aria-label="Advisory case file">
+        <div class="case-file-heading">
+          <span>Case file</span>
+          <span>01</span>
+        </div>
+        <dl>
+          <div><dt>Published</dt><dd>{fmt(d.date)}</dd></div>
+          <div><dt>Vendor</dt><dd>{d.vendor}</dd></div>
+          {d.product && <div><dt>Product</dt><dd>{d.product}</dd></div>}
+          <div><dt>Class</dt><dd>{d.class}</dd></div>
+          <div><dt>Severity</dt><dd class={`severity-text ${d.severity}`}>{d.severity}</dd></div>
+          <div><dt>Status</dt><dd>{d.status}</dd></div>
+        </dl>
+        {d.link && (
+          <a class="record-link" href={d.link} target="_blank" rel="noopener">
+            <span>External record</span><span aria-hidden="true">&#8599;</span>
+          </a>
+        )}
+        <p class="case-note">Public record prepared under coordinated disclosure.</p>
+      </aside>
+
+      <main class="prose advisory-prose">
+        <div class="technical-label"><span>Technical record</span><span>02</span></div>
+        <Content />
+      </main>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const advisories = (await getCollection('advisories'))
+  .filter((entry) => entry.data.status === 'Disclosed')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<Base title="Project Umbra — Disclosures">
+  <section class="wrap ledger-head">
+    <h1>Disclosures</h1>
+    <span class="ledger-count">{advisories.length} reported</span>
+  </section>
+
+  <section class="wrap ledger">
+    {
+      advisories.map((a) => (
+        <a class="row" href={`/advisories/${a.slug}`}>
+          <span class="date">{fmt(a.data.date)}</span>
+          <span class="target">
+            {a.data.title}{a.data.cve ? ` (${a.data.cve})` : ''}
+            <small>{a.data.summary}</small>
+          </span>
+          <span class={`sev ${a.data.severity}`}>{a.data.severity}</span>
+          <span class="status">{a.data.status}</span>
+          <span class="arrow">&#8594;</span>
+        </a>
+      ))
+    }
+  </section>
+</Base>
