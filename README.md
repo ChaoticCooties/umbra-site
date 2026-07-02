@@ -25,8 +25,9 @@ class:    string            # e.g. "Command Injection", "RCE", "XXE", "Access Co
 severity: Critical | High | Medium | Low | Info
 status:   Draft | Reported | Triaged | Fixed | Disclosed
 date:     YYYY-MM-DD
-cve:      string            # optional
-link:     https://...       # optional external advisory / CVE; renders a "Full advisory" button
+cve:        string          # optional; shown as the record identifier when present
+identifier: string          # optional; identifier shown when there is no CVE (e.g. "PR #2068"). Falls back to an auto UMB-… id
+link:       https://...      # optional external advisory / CVE; renders a "Full advisory" button
 summary:  string            # one line, shown in the list
 ```
 

@@ -15,7 +15,7 @@ const { entry } = Astro.props as Props;
 const d = entry.data;
 const { Content } = await entry.render();
 const fmt = (x: Date) => x.toISOString().slice(0, 10);
-const recordId = d.cve ?? `UMB-${fmt(d.date).replaceAll('-', '')}-${entry.slug.toUpperCase()}`;
+const recordId = d.cve ?? d.identifier ?? `UMB-${fmt(d.date).replaceAll('-', '')}-${entry.slug.toUpperCase()}`;
 const severityClass = d.severity.toLowerCase();
 ---
 
@@ -35,9 +35,9 @@ const severityClass = d.severity.toLowerCase();
           <p class="advisory-abstract">{d.summary}</p>
         </div>
 
-        <div class="status-stamp" aria-label={`Disclosure status: ${d.status}`}>
-          <span>Record status</span>
-          <strong>{d.status}</strong>
+        <div class="severity-stamp" aria-label={`Severity: ${d.severity}`}>
+          <span>Severity</span>
+          <strong>{d.severity}</strong>
           <small>{fmt(d.date)}</small>
         </div>
       </div>
@@ -57,7 +57,7 @@ const severityClass = d.severity.toLowerCase();
         </div>
         <div>
           <dt>Identifier</dt>
-          <dd>{d.cve ?? 'Pending assignment'}</dd>
+          <dd>{d.cve ?? d.identifier ?? 'N/A'}</dd>
         </div>
       </dl>
     </header>
@@ -74,7 +74,6 @@ const severityClass = d.severity.toLowerCase();
           {d.product && <div><dt>Product</dt><dd>{d.product}</dd></div>}
           <div><dt>Class</dt><dd>{d.class}</dd></div>
           <div><dt>Severity</dt><dd class={`severity-text ${d.severity}`}>{d.severity}</dd></div>
-          <div><dt>Status</dt><dd>{d.status}</dd></div>
         </dl>
         {d.link && (
           <a class="record-link" href={d.link} target="_blank" rel="noopener">

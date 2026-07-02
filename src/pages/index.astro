@@ -24,7 +24,6 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
             <small>{a.data.summary}</small>
           </span>
           <span class={`sev ${a.data.severity}`}>{a.data.severity}</span>
-          <span class="status">{a.data.status}</span>
           <span class="arrow">&#8594;</span>
         </a>
       ))

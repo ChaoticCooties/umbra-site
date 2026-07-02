@@ -11,6 +11,7 @@ const advisories = defineCollection({
     status: z.enum(['Draft', 'Reported', 'Triaged', 'Fixed', 'Disclosed']),
     date: z.coerce.date(),
     cve: z.string().optional(),
+    identifier: z.string().optional(),
     link: z.string().url().optional(),
     summary: z.string(),
   }),

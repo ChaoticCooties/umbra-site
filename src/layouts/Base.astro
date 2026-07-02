@@ -1,6 +1,12 @@
 ---
 import '../styles/global.css';
-const { title = 'Project Umbra', description = 'Project Umbra — independent security research and coordinated vulnerability disclosure.', bare = false } = Astro.props;
+const {
+  title = 'Project Umbra',
+  description = 'Public disclosure ledger for Project Umbra, an independent security research group — coordinated-disclosure write-ups of the vulnerabilities we find and report upstream.',
+  bare = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -10,6 +16,22 @@ const { title = 'Project Umbra', description = 'Project Umbra — independent se
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Project Umbra" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/png" href="/umbra.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
