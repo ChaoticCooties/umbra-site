@@ -1,83 +1,41 @@
 ---
 import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
 ---
-
 <Base title="About — Project Umbra">
-  <section class="wrap about">
-    <div class="about-eyebrow">
-      <span>About</span>
-      <span>Project Umbra</span>
-    </div>
-
-    <div class="accordion">
-      <div class="acc acc--static">
-        <div class="acc-head">
-          <span class="acc-no">01</span>
-          <span class="acc-label">Mandate</span>
-        </div>
-        <div class="acc-body">
-          <p>
-            An experimental open-source supply-chain security project. We use agentic LLM systems
-            to surface compromised packages — backdoored plugins, hijacked dependencies, malicious
-            updates — and coordinate their disclosure. Findings are published here only once the
-            vendor has had a chance to fix.
-          </p>
-        </div>
-      </div>
-
-      <details class="acc">
-        <summary>
-          <span class="acc-no">02</span>
-          <span class="acc-label">Disclosure policy</span>
-          <span class="acc-mark" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <p>
-            We report issues privately to the affected vendor and give them <b>90 days</b> to ship a
-            fix before anything is published. The clock starts on first contact. If a vendor responds
-            quickly, asks for more time in good faith, or the issue is already being exploited in the
-            wild, we adjust the timeline accordingly. Technical detail stays embargoed until disclosure.
-          </p>
-        </div>
-      </details>
-
-      <details class="acc">
-        <summary>
-          <span class="acc-no">03</span>
-          <span class="acc-label">Team</span>
-          <span class="acc-mark" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
+  <div class="wrap">
+    <header class="page-intro about-intro">
+      <h1>Behind the<br />research.</h1>
+      <p>An independent group investigating software supply chains and memory safety with agentic LLM systems and manual review.</p>
+    </header>
+    <div class="reading-layout about-layout">
+      <nav class="reading-nav" aria-label="On this page">
+        <p class="nav-title">About Umbra</p>
+        <a href="#mandate">Mandate</a>
+        <a href="#policy">Disclosure policy</a>
+        <a href="#team">Team</a>
+      </nav>
+      <div class="about-sections">
+        <section id="mandate" class="about-section">
+          <h2>The mandate</h2>
+          <p>An experimental open-source supply-chain security project. We use agentic LLM systems to surface compromised packages — backdoored plugins, hijacked dependencies, malicious updates — and coordinate their disclosure.</p>
+          <p>Findings are published here only once the vendor has had a chance to fix.</p>
+          <a class="text-link" href="/">Read the disclosed research <Arrow /></a>
+        </section>
+        <section id="policy" class="about-section">
+          <h2>Coordinated disclosure</h2>
+          <p>We report issues privately to the affected vendor and give them <strong>90 days</strong> to ship a fix before anything is published. The clock starts on first contact.</p>
+          <p>If a vendor responds quickly, asks for more time in good faith, or the issue is already being exploited in the wild, we adjust the timeline accordingly. Technical detail stays embargoed until disclosure.</p>
+        </section>
+        <section id="team" class="about-section">
+          <h2>The team</h2>
           <ul class="team">
-            <li>
-              <a href="https://www.linkedin.com/in/joechegne/" target="_blank" rel="noopener">Eu Joe</a>
-              <span>model, evals, pipeline</span>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/supertsumu/" target="_blank" rel="noopener">Damien Wong</a>
-              <span>triage, manual review</span>
-            </li>
-            <li>
-              <span class="tbd">Others</span>
-              <span>TBD</span>
-            </li>
+            <li><a href="https://www.linkedin.com/in/joechegne/" target="_blank" rel="noopener noreferrer">Eu Joe <Arrow direction="external" /></a><span>Model, evals, pipeline</span></li>
+            <li><a href="https://www.linkedin.com/in/supertsumu/" target="_blank" rel="noopener noreferrer">Damien Wong <Arrow direction="external" /></a><span>Triage, manual review</span></li>
+            <li><span class="team-name">Olivier Gagné</span><span>Triage, manual review</span></li>
           </ul>
-        </div>
-      </details>
-
-      <details class="acc">
-        <summary>
-          <span class="acc-no">04</span>
-          <span class="acc-label">Contact</span>
-          <span class="acc-mark" aria-hidden="true"></span>
-        </summary>
-        <div class="acc-body">
-          <p>
-            Reports, questions, or coordination: <a href="mailto:joe@cooties.io">joe@cooties.io</a>.
-            A PGP key is available on request for sensitive material.
-          </p>
-        </div>
-      </details>
+        </section>
+      </div>
     </div>
-  </section>
+  </div>
 </Base>

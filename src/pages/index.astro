@@ -1,32 +1,36 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-
+import Arrow from '../components/Arrow.astro';
+import Signal from '../components/Signal.astro';
 const advisories = (await getCollection('advisories'))
   .filter((entry) => entry.data.status === 'Disclosed')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
-
-<Base title="Project Umbra — Disclosures">
-  <section class="wrap ledger-head">
-    <h1>Disclosures</h1>
-    <span class="ledger-count">{advisories.length} reported</span>
-  </section>
-
-  <section class="wrap ledger">
-    {
-      advisories.map((a) => (
-        <a class="row" href={`/advisories/${a.slug}`}>
-          <span class="date">{fmt(a.data.date)}</span>
-          <span class="target">
-            {a.data.title}{a.data.cve ? ` (${a.data.cve})` : ''}
-            <small>{a.data.summary}</small>
-          </span>
-          <span class={`sev ${a.data.severity}`}>{a.data.severity}</span>
-          <span class="arrow">&#8594;</span>
-        </a>
-      ))
-    }
-  </section>
+<Base title="Project Umbra — Disclosed security research">
+  <div class="wrap">
+    <header class="page-intro home-intro">
+      <h1>Security research.<br />Public record.</h1>
+      <div class="intro-copy"><p>Independent research into software supply chains and memory safety.</p><p>Findings published through coordinated disclosure.</p></div>
+      <Signal />
+    </header>
+    <section class="disclosures" aria-labelledby="disclosures-title">
+      <header class="section-heading"><h2 id="disclosures-title">Disclosures</h2><span>{advisories.length} published {advisories.length === 1 ? 'record' : 'records'}</span></header>
+      <div class="research-list">
+        {advisories.map((a) => (
+          <article class="research-record">
+            <a class="research-link" href={`/advisories/${a.slug}`} aria-labelledby={`title-${a.slug}`}>
+              <div class="record-title"><h3 id={`title-${a.slug}`}>{a.data.title}</h3><span class="record-target">{a.data.vendor}{a.data.product ? ` / ${a.data.product}` : ''}</span></div>
+              <div class="record-summary"><p>{a.data.summary}</p><span class="identifier">{a.data.cve ?? a.data.identifier ?? a.data.class}</span></div>
+              <div class="record-meta"><time datetime={fmt(a.data.date)}>{fmt(a.data.date)}</time><span class={`severity ${a.data.severity}`}>{a.data.severity}<span class="sr-only"> severity</span></span></div>
+              <span class="record-action">Read advisory <Arrow /></span>
+            </a>
+          </article>
+        ))}
+        {advisories.length === 0 && <p class="empty-state">No public advisories yet. Findings appear here once disclosure is coordinated.</p>}
+      </div>
+    </section>
+    <aside class="research-note"><p>Every record follows coordinated disclosure.</p><a class="text-link" href="/about#policy">How we publish <Arrow /></a></aside>
+  </div>
 </Base>

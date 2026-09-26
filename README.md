@@ -1,6 +1,6 @@
 # Umbra site
 
-Static site (Astro) for Project Umbra: a black/white ledger of disclosed vulnerabilities plus an
+Static site (Astro) for Project Umbra: a dark research publication with disclosed advisories and an
 About page. Each advisory is a markdown file; the index list and the detail pages are generated from
 them. Deploys to `umbra.cooties.io`.
 
@@ -27,7 +27,7 @@ status:   Draft | Reported | Triaged | Fixed | Disclosed
 date:     YYYY-MM-DD
 cve:        string          # optional; shown as the record identifier when present
 identifier: string          # optional; identifier shown when there is no CVE (e.g. "PR #2068"). Falls back to an auto UMB-… id
-link:       https://...      # optional external advisory / CVE; renders a "Full advisory" button
+link:       https://...      # optional external advisory / CVE; renders an "External record" link
 summary:  string            # one line, shown in the list
 ```
 
@@ -55,5 +55,12 @@ The public custom domain is `umbra.cooties.io`:
 
 ## Design
 
-Monochrome theme in `src/styles/global.css`: mono type, hover-invert ledger rows, severity colors
-(Critical/High/Medium/Low). Flip `--bg`/`--fg` for a light variant.
+The dark research publication uses self-hosted Barlow and Barlow Condensed, open research rows,
+readable severity labels, and responsive advisory navigation. Design tokens and breakpoints live in
+`src/styles/global.css`; shared geometry and arrows live in `src/components/`. Fonts and SIL Open Font
+Licenses are bundled under `public/fonts/`. See `DESIGN.md` for the visual system.
+
+Advisory contents navigation is generated from level-two Markdown headings. The About page exposes
+the mandate, disclosure policy, and team without accordion controls. Public contact details are omitted.
+Keep verified advisory
+copy in the content collection; generated design mockups are visual references only.

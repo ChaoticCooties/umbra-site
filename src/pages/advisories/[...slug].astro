@@ -2,91 +2,41 @@
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-
+import Arrow from '../../components/Arrow.astro';
 export async function getStaticPaths() {
-  const advisories = (await getCollection('advisories')).filter(
-    (entry) => entry.data.status === 'Disclosed'
-  );
+  const advisories = (await getCollection('advisories')).filter((entry) => entry.data.status === 'Disclosed');
   return advisories.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
 }
-
 type Props = { entry: CollectionEntry<'advisories'> };
 const { entry } = Astro.props as Props;
 const d = entry.data;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const fmt = (x: Date) => x.toISOString().slice(0, 10);
 const recordId = d.cve ?? d.identifier ?? `UMB-${fmt(d.date).replaceAll('-', '')}-${entry.slug.toUpperCase()}`;
-const severityClass = d.severity.toLowerCase();
+const sections = headings.filter((heading) => heading.depth === 2);
 ---
-
-<Base title={`${d.vendor}${d.product ? ' ' + d.product : ''} — ${d.class}`} description={d.summary}>
-  <article class={`advisory-record severity-${severityClass}`}>
-    <header class="wrap dossier-hero">
-      <div class="record-register" aria-label="Advisory record identifier">
-        <span>UMBRA / DISCLOSURE RECORD</span>
-        <i aria-hidden="true"></i>
-        <span>{recordId}</span>
-      </div>
-
-      <div class="dossier-title-grid">
-        <div class="dossier-title">
-          <p class="dossier-kicker">Independent security research / coordinated disclosure</p>
-          <h1>{d.title}</h1>
-          <p class="advisory-abstract">{d.summary}</p>
-        </div>
-
-        <div class="severity-stamp" aria-label={`Severity: ${d.severity}`}>
-          <span>Severity</span>
-          <strong>{d.severity}</strong>
-          <small>{fmt(d.date)}</small>
-        </div>
-      </div>
-
-      <dl class="dossier-meta">
-        <div>
-          <dt>Target</dt>
-          <dd>{d.vendor}{d.product ? ` / ${d.product}` : ''}</dd>
-        </div>
-        <div>
-          <dt>Vulnerability class</dt>
-          <dd>{d.class}</dd>
-        </div>
-        <div>
-          <dt>Severity</dt>
-          <dd><span class={`severity-signal ${d.severity}`}></span>{d.severity}</dd>
-        </div>
-        <div>
-          <dt>Identifier</dt>
-          <dd>{d.cve ?? d.identifier ?? 'N/A'}</dd>
-        </div>
+<Base title={`${d.title} — Project Umbra`} description={d.summary}>
+  <article class="wrap advisory-record">
+    <header class="advisory-header">
+      <a class="back-link" href="/"><Arrow direction="left" /> All disclosures</a>
+      <h1>{d.title}</h1>
+      <p class="advisory-abstract">{d.summary}</p>
+      <dl class="advisory-meta">
+        <div><dt>Affected software</dt><dd>{d.vendor}{d.product ? ` / ${d.product}` : ''}</dd></div>
+        <div><dt>Published</dt><dd><time datetime={fmt(d.date)}>{fmt(d.date)}</time></dd></div>
+        <div><dt>Identifier</dt><dd class="identifier">{recordId}</dd></div>
+        <div><dt>Severity</dt><dd class={`severity ${d.severity}`}>{d.severity}</dd></div>
       </dl>
     </header>
-
-    <div class="wrap advisory-body-grid">
-      <aside class="case-file" aria-label="Advisory case file">
-        <div class="case-file-heading">
-          <span>Case file</span>
-          <span>01</span>
-        </div>
-        <dl>
-          <div><dt>Published</dt><dd>{fmt(d.date)}</dd></div>
-          <div><dt>Vendor</dt><dd>{d.vendor}</dd></div>
-          {d.product && <div><dt>Product</dt><dd>{d.product}</dd></div>}
-          <div><dt>Class</dt><dd>{d.class}</dd></div>
-          <div><dt>Severity</dt><dd class={`severity-text ${d.severity}`}>{d.severity}</dd></div>
-        </dl>
-        {d.link && (
-          <a class="record-link" href={d.link} target="_blank" rel="noopener">
-            <span>External record</span><span aria-hidden="true">&#8599;</span>
-          </a>
-        )}
-        <p class="case-note">Public record prepared under coordinated disclosure.</p>
+    <div class="reading-layout">
+      <aside class="reading-nav advisory-nav" aria-label="Advisory navigation">
+        {sections.length > 0 && <nav aria-label="In this advisory"><p class="nav-title">In this advisory</p>{sections.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}</nav>}
+        <dl class="case-details"><div><dt>Vulnerability class</dt><dd>{d.class}</dd></div><div><dt>Disclosure status</dt><dd>{d.status}</dd></div></dl>
+        {d.link && <a class="text-link external-record" href={d.link} target="_blank" rel="noopener noreferrer">External record <Arrow direction="external" /><span class="sr-only"> (opens in a new tab)</span></a>}
+        <a class="policy-link" href="/about#policy">Our disclosure policy</a>
       </aside>
-
-      <main class="prose advisory-prose">
-        <div class="technical-label"><span>Technical record</span><span>02</span></div>
-        <Content />
-      </main>
+      <div class="prose"><Content /></div>
     </div>
+    <div class="article-end"><a class="text-link" href="/"><Arrow direction="left" /> Back to disclosures</a></div>
   </article>
 </Base>

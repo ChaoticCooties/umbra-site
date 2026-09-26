@@ -1,0 +1,6 @@
+---
+const { direction = 'right', class: className = '' } = Astro.props;
+---
+<svg class={`icon-arrow ${className}`} width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  {direction === 'external' ? <path d="M6 18 18 6M6 6h12v12" /> : direction === 'left' ? <path d="M20 12H4m7-7-7 7 7 7" /> : <path d="M4 12h16m-7-7 7 7-7 7" />}
+</svg>

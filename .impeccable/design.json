@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-26T13:38:19.835505+00:00",
+  "title": "Design System: Project Umbra",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Charcoal",
+        "tonalRamp": [
+          "oklch(15.00% 0.00262 247.98)",
+          "oklch(26.43% 0.00262 247.98)",
+          "oklch(37.86% 0.00262 247.98)",
+          "oklch(49.29% 0.00262 247.98)",
+          "oklch(60.71% 0.00262 247.98)",
+          "oklch(72.14% 0.00262 247.98)",
+          "oklch(83.57% 0.00262 247.98)",
+          "oklch(95.00% 0.00262 247.98)"
+        ]
+      },
+      "fg": {
+        "role": "primary",
+        "displayName": "Chalk",
+        "tonalRamp": [
+          "oklch(15.00% 0.00531 106.50)",
+          "oklch(26.43% 0.00531 106.50)",
+          "oklch(37.86% 0.00531 106.50)",
+          "oklch(49.29% 0.00531 106.50)",
+          "oklch(60.71% 0.00531 106.50)",
+          "oklch(72.14% 0.00531 106.50)",
+          "oklch(83.57% 0.00531 106.50)",
+          "oklch(95.00% 0.00531 106.50)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Secondary gray",
+        "tonalRamp": [
+          "oklch(15.00% 0.00267 165.05)",
+          "oklch(26.43% 0.00267 165.05)",
+          "oklch(37.86% 0.00267 165.05)",
+          "oklch(49.29% 0.00267 165.05)",
+          "oklch(60.71% 0.00267 165.05)",
+          "oklch(72.14% 0.00267 165.05)",
+          "oklch(83.57% 0.00267 165.05)",
+          "oklch(95.00% 0.00267 165.05)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Reading gray",
+        "tonalRamp": [
+          "oklch(15.00% 0.00351 145.54)",
+          "oklch(26.43% 0.00351 145.54)",
+          "oklch(37.86% 0.00351 145.54)",
+          "oklch(49.29% 0.00351 145.54)",
+          "oklch(60.71% 0.00351 145.54)",
+          "oklch(72.14% 0.00351 145.54)",
+          "oklch(83.57% 0.00351 145.54)",
+          "oklch(95.00% 0.00351 145.54)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Rule gray",
+        "tonalRamp": [
+          "oklch(15.00% 0.00322 228.87)",
+          "oklch(26.43% 0.00322 228.87)",
+          "oklch(37.86% 0.00322 228.87)",
+          "oklch(49.29% 0.00322 228.87)",
+          "oklch(60.71% 0.00322 228.87)",
+          "oklch(72.14% 0.00322 228.87)",
+          "oklch(83.57% 0.00322 228.87)",
+          "oklch(95.00% 0.00322 228.87)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Raised charcoal",
+        "tonalRamp": [
+          "oklch(15.00% 0.00363 228.97)",
+          "oklch(26.43% 0.00363 228.97)",
+          "oklch(37.86% 0.00363 228.97)",
+          "oklch(49.29% 0.00363 228.97)",
+          "oklch(60.71% 0.00363 228.97)",
+          "oklch(72.14% 0.00363 228.97)",
+          "oklch(83.57% 0.00363 228.97)",
+          "oklch(95.00% 0.00363 228.97)"
+        ]
+      },
+      "crit": {
+        "role": "secondary",
+        "displayName": "Critical coral",
+        "tonalRamp": [
+          "oklch(15.00% 0.15678 27.04)",
+          "oklch(26.43% 0.15678 27.04)",
+          "oklch(37.86% 0.15678 27.04)",
+          "oklch(49.29% 0.15678 27.04)",
+          "oklch(60.71% 0.15678 27.04)",
+          "oklch(72.14% 0.15678 27.04)",
+          "oklch(83.57% 0.15678 27.04)",
+          "oklch(95.00% 0.15678 27.04)"
+        ]
+      },
+      "high": {
+        "role": "secondary",
+        "displayName": "High apricot",
+        "tonalRamp": [
+          "oklch(15.00% 0.12506 61.18)",
+          "oklch(26.43% 0.12506 61.18)",
+          "oklch(37.86% 0.12506 61.18)",
+          "oklch(49.29% 0.12506 61.18)",
+          "oklch(60.71% 0.12506 61.18)",
+          "oklch(72.14% 0.12506 61.18)",
+          "oklch(83.57% 0.12506 61.18)",
+          "oklch(95.00% 0.12506 61.18)"
+        ]
+      },
+      "med": {
+        "role": "secondary",
+        "displayName": "Medium ochre",
+        "tonalRamp": [
+          "oklch(15.00% 0.10565 93.59)",
+          "oklch(26.43% 0.10565 93.59)",
+          "oklch(37.86% 0.10565 93.59)",
+          "oklch(49.29% 0.10565 93.59)",
+          "oklch(60.71% 0.10565 93.59)",
+          "oklch(72.14% 0.10565 93.59)",
+          "oklch(83.57% 0.10565 93.59)",
+          "oklch(95.00% 0.10565 93.59)"
+        ]
+      },
+      "low": {
+        "role": "secondary",
+        "displayName": "Low pale blue",
+        "tonalRamp": [
+          "oklch(15.00% 0.07171 251.90)",
+          "oklch(26.43% 0.07171 251.90)",
+          "oklch(37.86% 0.07171 251.90)",
+          "oklch(49.29% 0.07171 251.90)",
+          "oklch(60.71% 0.07171 251.90)",
+          "oklch(72.14% 0.07171 251.90)",
+          "oklch(83.57% 0.07171 251.90)",
+          "oklch(95.00% 0.07171 251.90)"
+        ]
+      },
+      "info": {
+        "role": "neutral",
+        "displayName": "Info silver",
+        "tonalRamp": [
+          "oklch(15.00% 0.00263 165.06)",
+          "oklch(26.43% 0.00263 165.06)",
+          "oklch(37.86% 0.00263 165.06)",
+          "oklch(49.29% 0.00263 165.06)",
+          "oklch(60.71% 0.00263 165.06)",
+          "oklch(72.14% 0.00263 165.06)",
+          "oklch(83.57% 0.00263 165.06)",
+          "oklch(95.00% 0.00263 165.06)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Shared first-level heading default; surface overrides remain in CSS."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Shared second-level heading default."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Research-row and shared third-level headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "General body text."
+      },
+      "reading": {
+        "displayName": "Reading",
+        "purpose": "Technical article prose."
+      },
+      "identifier": {
+        "displayName": "Identifier",
+        "purpose": "Technical identifiers; dates and code have their own size overrides."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Definition-list labels in body type."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "interaction-transition",
+        "value": "0.2s ease",
+        "purpose": "Research-row feedback and arrow movement."
+      },
+      {
+        "name": "signal-reveal",
+        "value": "1s cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "One-time decorative ray reveal; disabled with reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop-max",
+        "value": "1180px"
+      },
+      {
+        "name": "stacked-reading-max",
+        "value": "800px"
+      },
+      {
+        "name": "phone-max",
+        "value": "520px"
+      },
+      {
+        "name": "wide-signal-min",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Text link",
+      "kind": "custom",
+      "description": "Underlined native action with a directional SVG.",
+      "html": "<a class=\"ds-text-link\" href=\"#policy\">How we publish <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h16m-7-7 7 7-7 7\" /></svg></a>",
+      "css": ".ds-text-link { display:inline-flex;align-items:center;gap:12px;min-height:44px;color:var(--fg, #f1f1ed);font-size:16px;font-family: var(--sans, Barlow, system-ui, sans-serif);text-decoration:underline;text-decoration-color:var(--line, #3c3e3f);text-underline-offset:6px; }.ds-text-link:hover {text-decoration-color:var(--fg, #f1f1ed);}.ds-text-link:focus-visible { outline: 2px solid var(--fg, #f1f1ed); outline-offset: 6px; }svg { stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }",
+      "refersTo": "text-link"
+    },
+    {
+      "name": "Main navigation",
+      "kind": "nav",
+      "description": "Persistent navigation with the current page underlined.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#disclosures\" aria-current=\"page\">Disclosures</a><a href=\"#about\">About</a></nav>",
+      "css": ".ds-nav {display:flex;align-items:center;gap:clamp(24px, 3vw, 48px);padding-bottom:26px;font-family: var(--sans, Barlow, system-ui, sans-serif);}.ds-nav a {position:relative;min-height:44px;display:inline-flex;align-items:center;font-size:16px;color:var(--muted, #a8aaa9);text-decoration:none;}.ds-nav a:hover,.ds-nav a[aria-current] {color:var(--fg, #f1f1ed);}.ds-nav a[aria-current]::after {content:\"\";position:absolute;bottom:-26px;height:2px;background:var(--fg, #f1f1ed);inset-inline:0;}.ds-nav a:focus-visible { outline: 2px solid var(--fg, #f1f1ed); outline-offset: 6px; }",
+      "refersTo": "main-navigation"
+    },
+    {
+      "name": "Severity",
+      "kind": "custom",
+      "description": "Written severity and a square marker; no badge container.",
+      "html": "<span class=\"ds-severity\">Critical</span>",
+      "css": ".ds-severity {color:var(--crit, #ff8074);font-size:16px;font-weight:600;font-family: var(--sans, Barlow, system-ui, sans-serif);}.ds-severity::before {content:\"\";display:inline-block;height:6px;width:6px;background:currentColor;margin:0 8px 2px 0;}",
+      "refersTo": "severity-critical"
+    },
+    {
+      "name": "Research record",
+      "kind": "custom",
+      "description": "An open record with full-row native link and tonal interaction feedback.",
+      "html": "<article class=\"ds-record\"><a class=\"ds-record-link\" href=\"#advisory\" aria-labelledby=\"ds-record-title\"><div><h3 id=\"ds-record-title\">Published research</h3><span class=\"ds-target\">Affected software</span></div><p>A disclosed finding and its technical summary.</p><time datetime=\"2026-09-26\">2026-09-26</time><span class=\"ds-action\">Read advisory <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h16m-7-7 7 7-7 7\" /></svg></span></a></article>",
+      "css": ".ds-record {border-bottom:1px solid var(--line, #3c3e3f);font-family: var(--sans, Barlow, system-ui, sans-serif);}.ds-record-link {display:grid;grid-template-columns:1.15fr 1.35fr 104px 135px;gap:34px;padding:34px 0 38px;color:var(--fg, #f1f1ed);text-decoration:none;transition:background .2s ease;}.ds-record-link:hover,.ds-record-link:focus-visible {background:var(--panel, #191b1c);}.ds-record-link:focus-visible { outline: 2px solid var(--fg, #f1f1ed); outline-offset: 6px; }.ds-record h3 {margin:0;font-family: var(--display, \"Barlow Condensed\", \"Arial Narrow\", sans-serif);font-size:clamp(30px,2.8vw,42px);line-height:1.08;font-weight:600;letter-spacing:-.012em;}.ds-target {display:block;margin-top:17px;color:var(--muted, #a8aaa9);font-size:15px;}.ds-record p {margin:0;color:var(--text, #c7c9c7);font-size:17px;line-height:1.6;}.ds-record time {font-family:var(--mono, ui-monospace, SFMono-Regular, Consolas, monospace);font-size:12px;color:var(--muted, #a8aaa9);white-space:nowrap;}.ds-action {align-self:center;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:16px;white-space:nowrap;padding:12px 0;}.ds-action svg {transition:transform .2s ease;}.ds-record-link:hover svg {transform:translateX(4px);}svg { stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }@media(max-width:800px){.ds-record-link{grid-template-columns:1fr;gap:20px;}}@media(prefers-reduced-motion:reduce){.ds-record-link,.ds-action svg{transition:none;}}",
+      "refersTo": "research-record-hover"
+    },
+    {
+      "name": "Advisory facts",
+      "kind": "custom",
+      "description": "Ruled definition-list metadata with responsive columns.",
+      "html": "<dl class=\"ds-facts\"><div><dt>Affected software</dt><dd>Vendor / Product</dd></div><div><dt>Published</dt><dd>2026-09-26</dd></div><div><dt>Identifier</dt><dd>Public record</dd></div><div><dt>Severity</dt><dd>High</dd></div></dl>",
+      "css": ".ds-facts {display:grid;grid-template-columns:1.2fr 1fr 1fr .65fr;margin:0;border-block:1px solid var(--line, #3c3e3f);font-family: var(--sans, Barlow, system-ui, sans-serif);}.ds-facts>div {padding:22px 24px 24px 0;min-width:0;}.ds-facts>div+div {padding-left:24px;border-left:1px solid var(--line, #3c3e3f);}.ds-facts dt {font-size:13px;color:var(--muted, #a8aaa9);margin-bottom:9px;}.ds-facts dd {margin:0;font-size:16px;color:var(--fg, #f1f1ed);overflow-wrap:anywhere;}@media(max-width:800px){.ds-facts{grid-template-columns:1fr 1fr;}.ds-facts>div:nth-child(3){border-left:0;padding-left:0;}.ds-facts>div:nth-child(n+3){border-top:1px solid var(--line, #3c3e3f);}}"
+    },
+    {
+      "name": "Contents navigation",
+      "kind": "nav",
+      "description": "In-page native links to generated article sections.",
+      "html": "<nav class=\"ds-contents\" aria-label=\"In this advisory\"><p>In this advisory</p><a href=\"#overview\">Overview</a><a href=\"#resolution\">Resolution</a></nav>",
+      "css": ".ds-contents {font-size:15px;font-family: var(--sans, Barlow, system-ui, sans-serif);}.ds-contents p {color:var(--fg, #f1f1ed);font-weight:600;margin:0 0 16px;}.ds-contents a {display:block;color:var(--muted, #a8aaa9);padding:9px 0;line-height:1.45;text-decoration:none;}.ds-contents a:hover {color:var(--fg, #f1f1ed);text-decoration:underline;text-underline-offset:5px;}.ds-contents a:focus-visible { outline: 2px solid var(--fg, #f1f1ed); outline-offset: 6px; }"
+    },
+    {
+      "name": "Code sample",
+      "kind": "custom",
+      "description": "Keyboard-reachable technical block with horizontal overflow.",
+      "html": "<pre class=\"ds-code\" tabindex=\"0\" role=\"region\" aria-label=\"Code sample\"><code>record.status = \"Disclosed\";</code></pre>",
+      "css": ".ds-code {max-width:100%;overflow-x:auto;border:1px solid var(--line, #3c3e3f);padding:22px;font-size:14px;line-height:1.7;tab-size:2;color:var(--text, #c7c9c7);font-family:var(--mono, ui-monospace, SFMono-Regular, Consolas, monospace);}.ds-code code {font-family:inherit;font-size:inherit;overflow-wrap:normal;}.ds-code:focus-visible { outline: 2px solid var(--fg, #f1f1ed); outline-offset: 6px; }@media(max-width:520px){.ds-code{padding:16px;font-size:12px;}}",
+      "refersTo": "code-sample"
+    },
+    {
+      "name": "Inline code",
+      "kind": "custom",
+      "description": "Compact technical string on a panel tone.",
+      "html": "<code class=\"ds-inline-code\">status: Disclosed</code>",
+      "css": ".ds-inline-code {font-family:var(--mono, ui-monospace, SFMono-Regular, Consolas, monospace);font-size:.8em;color:var(--text, #c7c9c7);background:var(--panel, #191b1c);padding:3px 5px;}",
+      "refersTo": "inline-code"
+    }
+  ],
+  "narrative": {
+    "northStar": "Signal-analysis publication",
+    "overview": "A signal-analysis publication: charcoal, chalk, condensed headings, open research rows, and precise SVG rays. The interface gives disclosed findings and readable evidence the strongest visual weight. Dark mode is a binding brand commitment; severity provides the only semantic color scale.\n\nThe system is flat and restrained. Horizontal rules organize records, a narrow navigation column supports long reading, and small metadata stays secondary to titles and technical prose. The existing Umbra mark remains paired with a text wordmark.",
+    "keyCharacteristics": [
+      "Charcoal and chalk structure with readable severity colors.",
+      "Condensed display type; open, unboxed research records.",
+      "A shared reading grid with contents navigation and technical prose.",
+      "Precise decorative SVG geometry and brief, optional motion."
+    ],
+    "rules": [
+      {
+        "name": "The Severity Rule",
+        "body": "Color reinforces a written severity label; it never carries severity alone.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reading Rule",
+        "body": "Use condensed type for headings, Barlow for prose, and monospace for technical strings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Surface Rule",
+        "body": "Separate publication content with spacing, rules, and tonal feedback; preserve open surfaces.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve dark mode and the existing Umbra mark.",
+      "Do keep severity readable as text alongside its color.",
+      "Do preserve semantic headings, native links, dates, definition lists, and generated contents anchors.",
+      "Do keep focus visible, code samples keyboard reachable, and reduced motion respected.",
+      "Do reuse the shared reading grid and responsive record order."
+    ],
+    "donts": [
+      "Don't use severity colors as unrelated brand accents.",
+      "Don't introduce shadows, rounded card shells, or ornamental textures into these flat publication patterns.",
+      "Don't replace technical prose with display type or set body text in monospace.",
+      "Don't hide essential content behind animation or turn the decorative signal into an invented data chart.",
+      "Don't publish contact navigation, email addresses, or mailto links; the user requested their omission to reduce scraping."
+    ]
+  }
+}

@@ -7,17 +7,18 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL('/og.png', Astro.site).href;
+const isAbout = Astro.url.pathname.replace(/\/$/, '') === '/about';
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101112" />
+    <meta name="color-scheme" content="dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Project Umbra" />
     <meta property="og:title" content={title} />
@@ -26,39 +27,41 @@ const ogImage = new URL('/og.png', Astro.site).href;
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-
     <link rel="icon" type="image/png" href="/umbra.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/barlow-condensed-semibold.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/barlow-regular.ttf" as="font" type="font/ttf" crossorigin />
   </head>
   <body>
+    <!-- THESIS: Disclosed research is the substance; a signal-analysis publication gives evidence space.
+    OWN-WORLD: Charcoal, chalk, condensed Barlow headings, open horizontal research rows, precise SVG rays.
+    STORY: Scan findings, identify the affected software and severity, then read the public record.
+    FIRST VIEWPORT: Compact navigation, split introduction, two research abstracts with dates and identifiers.
+    FORM: Signal-analysis plate, grounded direction 5, seed c1bdc09a. Dark mode and research-first confirmed.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
     {!bare && (
       <header class="site-header">
-        <a href="/" class="wordmark">
-          <img src="/umbra.png" alt="" class="mark" width="48" height="46" />
-          <span>Project Umbra<span class="dot">.</span></span>
-        </a>
-        <nav class="nav">
-          <a href="/">Disclosures</a>
-          <a href="/about">About</a>
-        </nav>
+        <div class="wrap header-inner">
+          <a href="/" class="wordmark" aria-label="Project Umbra home">
+            <span class="mark-crop"><img src="/umbra.png" alt="" width="737" height="692" /></span>
+            <span>Project Umbra</span>
+          </a>
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : !isAbout ? 'location' : undefined}>Disclosures</a>
+            <a href="/about" aria-current={isAbout ? 'page' : undefined}>About</a>
+          </nav>
+        </div>
       </header>
     )}
-    <main>
-      <slot />
-    </main>
-    <footer class="site-footer">
-      <span>Project Umbra</span>
-      <span>Coordinated disclosure · umbra.cooties.io</span>
+    <main id="main-content" tabindex="-1"><slot /></main>
+    <footer class="site-footer wrap">
+      <div><a class="footer-brand" href="/">Project Umbra</a><p>Independent security research.</p></div>
+      <nav aria-label="Footer navigation"><a href="/about#policy">Disclosure policy</a><a href="/about#team">Team</a></nav>
+      <p class="footer-note">Public findings. Coordinated disclosure.</p>
     </footer>
   </body>
 </html>

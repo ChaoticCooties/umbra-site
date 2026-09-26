@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: ui-mockup. Create a high fidelity desktop website design comp at landscape 1536x1024 for Project Umbra, an independent security research publication. Flat actual website screenshot, no perspective, no physical mockup. Strict black #101112 background, offwhite #f0f0ed, gray #a7a8a6, severity alone orange/red. Typography: distinctive condensed grotesque like Barlow Condensed for headings, neutral sans for prose, mono ONLY dates and identifiers. Crisp flat sparse white signal line geometry as an abstract brand motif, no fake charts or data. Real navigation Disclosures, About, Contact. Main heading 'Security research. Public record.' Supporting line 'Independent research into software supply chains and memory safety. Findings published through coordinated disclosure.' Exactly two disclosed findings: 'CTranslate2 model-loader heap overflows', identifier 'PR #2068', High; 'EssentialPlugin backdoor', identifier 'CVE-2026-6443', Critical. Each record has title, one short abstract, identifier, severity, and Read advisory. Strong readable research first composition, no rounded cards, no neon, no gradients, no giant numbers, no eyebrow above main heading, no decorative section numbering, no invented metrics. ",
+  "composition": "b",
+  "approved": false,
+  "selection": "agent working choice under authorized overhaul; optional user preference pending",
+  "notes": "Visual reference only; all copy replaced with existing verified content."
+}
