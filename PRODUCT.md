@@ -52,8 +52,8 @@ shows only disclosed findings; nothing embargoed reaches the built site.
 
 - Two disclosed advisories: CVE-2026-6443 (WordPress EssentialPlugin backdoor, Critical) and
   CTranslate2 PR #2068 (heap overflows, High).
-- Team: Eu Joe (model, evals, pipeline), Damien Wong (triage, manual review), Olivier Gagné (triage,
-  manual review).
+- Team: Eu Joe (model, evals, pipeline), Damien Wong (former; triage, manual review), Olivier Gagné
+  (former; triage, manual review).
 - No testimonials, press, bounty totals, or client lists exist. Don't fabricate them.
 
 ## Product Principles
