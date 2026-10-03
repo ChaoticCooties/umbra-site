@@ -6,9 +6,9 @@ class: "Heap buffer overflow (OOB read + OOB write)"
 severity: "High"
 status: "Disclosed"
 date: 2026-07-01
-identifier: "PR #2068"
+cve: "CVE-2026-102566, CVE-2026-102567"
 link: "https://github.com/OpenNMT/CTranslate2/pull/2068"
-summary: "Two heap overflows in CTranslate2's model loader: an out-of-bounds read from a string field with no null terminator, and an out-of-bounds write from a tensor length that is never checked against the buffer size. Both are reachable by loading a crafted model file. Fixed in PR #2068."
+summary: "Two heap overflows in CTranslate2's model loader: an out-of-bounds read from a string field with no null terminator, and an out-of-bounds write from a tensor length that is never checked against the buffer size. Both are reachable by loading a crafted model file. Fixed in CTranslate2 4.8.1 (PR #2068)."
 ---
 
 ## Overview
@@ -16,6 +16,8 @@ summary: "Two heap overflows in CTranslate2's model loader: an out-of-bounds rea
 CTranslate2 is OpenNMT's inference engine for Transformer models, written in C++. It loads models from a custom binary format, reading fields directly into heap buffers in `Model::load` (`src/models/model.cc`). Length fields in that format are taken from the file and used without validation against the buffers they fill.
 
 ## Out-of-bounds read in string deserialization
+
+CVE-2026-102567. Affects CTranslate2 versions earlier than 4.8.1.
 
 `consume<std::string>` reads the string fields in a model file: the spec name and each variable name.
 
@@ -35,6 +37,8 @@ std::string consume(std::istream& in) {
 
 ## Out-of-bounds write in variable loading
 
+CVE-2026-102566. Affects CTranslate2 versions earlier than 4.8.1.
+
 For each variable, the loader reads a length `num_bytes` from the file and reads that many bytes into the variable's buffer:
 
 ```cpp
@@ -46,7 +50,7 @@ consume<char>(model_file, num_bytes, static_cast<char*>(variable.buffer()));
 
 ## Fix
 
-PR #2068 passes the known length to the string constructor and rejects a variable whose payload size does not match its buffer:
+CTranslate2 4.8.1 includes the fix from PR #2068. The fix passes the known length to the string constructor and rejects a variable whose payload size does not match its buffer:
 
 ```cpp
 std::string str(c_str, str_length);
