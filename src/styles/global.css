@@ -52,14 +52,11 @@ h3 { font-size: clamp(30px, 2.8vw, 42px); line-height: 1.08; letter-spacing: -.0
 .site-nav a:hover, .site-nav a[aria-current] { color: var(--fg); }
 .site-nav a[aria-current]::after { content: ''; position: absolute; bottom: -26px; height: 2px; background: var(--fg); inset-inline: 0; }
 .page-intro { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: 56px; padding-block: 68px 72px; }
-.home-intro { position: relative; grid-template-columns: 1.4fr .9fr; padding-right: 155px; }
-.home-intro h1 { text-transform: uppercase; font-size: clamp(52px, 6vw, 88px); }
-.intro-copy { position: relative; z-index: 1; max-width: 34ch; border-left: 1px solid var(--line); padding-left: 32px; }
-.intro-copy p { font-size: 20px; line-height: 1.5; color: var(--text); }
-.intro-copy p + p { margin-top: 22px; }
-.signal { width: 190px; height: 215px; position: absolute; right: calc(0px - var(--gutter)); top: 48px; color: #747875; stroke: currentColor; stroke-width: 1; overflow: hidden; }
-.signal-ray { stroke: var(--fg); animation: trace 1s cubic-bezier(.16, 1, .3, 1) both; }
-@keyframes trace { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+.home-intro { grid-template-columns: 1fr minmax(0, 46ch); align-items: end; padding-block: 64px 40px; }
+.home-intro h1 { text-transform: uppercase; font-size: clamp(48px, 5vw, 72px); }
+.intro-copy { font-size: 18px; line-height: 1.6; color: var(--text); }
+.intro-copy a { color: var(--fg); white-space: nowrap; text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 5px; }
+.intro-copy a:hover { text-decoration-color: var(--fg); }
 .section-heading { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding-block: 20px; }
 .section-heading h2 { font-family: var(--sans); font-size: 17px; font-weight: 600; letter-spacing: 0; }
 .section-heading > span { color: var(--muted); font-size: 14px; }
@@ -83,7 +80,6 @@ time { font-family: var(--mono); font-size: 12px; color: var(--muted); white-spa
 .record-action { align-self: center; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 16px; white-space: nowrap; padding-block: 12px; }
 .record-action .icon-arrow { transition: transform .2s ease; }
 .research-link:hover .record-action .icon-arrow { transform: translateX(4px); }
-.research-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 27px 0; color: var(--muted); font-size: 15px; }
 .text-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--fg); font-size: 16px; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 6px; }
 .text-link:hover { text-decoration-color: var(--fg); }
 .empty-state { padding-block: 40px; color: var(--text); }
@@ -94,7 +90,6 @@ time { font-family: var(--mono); font-size: 12px; color: var(--muted); white-spa
 .site-footer nav { display: flex; align-items: flex-start; gap: 30px; }
 .site-footer nav a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; color: var(--muted); }
 .site-footer nav a:hover { color: var(--fg); }
-.site-footer .footer-note { grid-column: 1 / -1; font-size: 12px; }
 
 /* About and technical records share one reading rhythm. */
 .about-intro { padding-block: 64px; border-bottom: 1px solid var(--line); }
@@ -160,12 +155,7 @@ dt { font-size: 13px; color: var(--muted); margin-bottom: 9px; }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin-block: 36px; }
 .article-end { display: flex; justify-content: space-between; gap: 28px; border-top: 1px solid var(--line); margin-top: 64px; padding-top: 24px; }
 
-@media (min-width: 1600px) { .signal { right: 0; } }
 @media (max-width: 1180px) {
-  .home-intro { padding-right: 80px; gap: 36px; }
-  .signal { width: 120px; opacity: .65; }
-  .intro-copy { padding-left: 25px; }
-  .intro-copy p { font-size: 18px; }
   .research-link { grid-template-columns: 1.05fr 1.4fr 108px; gap: 24px; }
   .record-action { grid-column: 2 / -1; justify-self: end; margin-top: -5px; }
   .reading-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 48px; }
@@ -175,11 +165,7 @@ dt { font-size: 13px; color: var(--muted); margin-bottom: 9px; }
   .wordmark > span:last-child { font-size: 24px; letter-spacing: .055em; }
   .site-nav { gap: 22px; }
   .site-nav a[aria-current]::after { bottom: -20px; }
-  .home-intro { grid-template-columns: 1fr; padding: 48px 0; gap: 28px; }
-  .home-intro h1 { font-size: clamp(54px, 9vw, 76px); }
-  .intro-copy { border: 0; padding: 0 85px 0 0; max-width: 48ch; }
-  .intro-copy p + p { margin-top: 10px; }
-  .signal { top: auto; bottom: 40px; width: 100px; height: 130px; right: calc(0px - var(--gutter)); }
+  .home-intro { grid-template-columns: 1fr; padding-block: 48px 32px; gap: 20px; }
   .research-link { grid-template-columns: 1fr 110px; gap: 20px; }
   .record-title { grid-column: 1; }
   .record-summary { grid-column: 1 / -1; grid-row: 2; max-width: 68ch; }
@@ -216,11 +202,7 @@ dt { font-size: 13px; color: var(--muted); margin-bottom: 9px; }
   .site-nav { gap: 18px; }
   .site-nav a { font-size: 14px; }
   .site-nav a[aria-current]::after { bottom: -18px; }
-  .home-intro { padding-block: 40px; }
-  .home-intro h1 { font-size: clamp(42px, 10.4vw, 57px); }
-  .intro-copy { padding-right: 35px; }
-  .intro-copy p { font-size: 18px; }
-  .signal { width: 55px; height: 100px; bottom: 37px; }
+  .home-intro { padding-block: 40px 28px; }
   .section-heading { padding-block: 17px; }
   .research-link { grid-template-columns: 1fr; padding-block: 27px; gap: 20px; }
   .record-title h3 { font-size: 34px; }
@@ -228,11 +210,8 @@ dt { font-size: 13px; color: var(--muted); margin-bottom: 9px; }
   .record-summary { grid-row: 3; }
   .record-summary p { font-size: 17px; }
   .record-action { grid-row: 4; justify-self: start; padding-block: 7px; }
-  .research-note { display: block; padding-top: 24px; }
-  .research-note .text-link { margin-top: 8px; }
   .site-footer { grid-template-columns: 1fr; gap: 18px; }
   .site-footer nav { gap: 24px; }
-  .site-footer .footer-note { margin-top: 0; }
   .about-intro { grid-template-columns: 1fr; gap: 25px; padding-block: 40px; }
   .about-intro h1 { font-size: 64px; }
   .about-section p { font-size: 18px; }

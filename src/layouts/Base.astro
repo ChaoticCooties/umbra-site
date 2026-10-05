@@ -59,9 +59,8 @@ const isAbout = Astro.url.pathname.replace(/\/$/, '') === '/about';
     )}
     <main id="main-content" tabindex="-1"><slot /></main>
     <footer class="site-footer wrap">
-      <div><a class="footer-brand" href="/">Project Umbra</a><p>Independent security research.</p></div>
+      <a class="footer-brand" href="/">Project Umbra</a>
       <nav aria-label="Footer navigation"><a href="/about#policy">Disclosure policy</a><a href="/about#team">Team</a></nav>
-      <p class="footer-note">Public findings. Coordinated disclosure.</p>
     </footer>
   </body>
 </html>
