@@ -33,7 +33,7 @@ const referenceLabel = reference ? `${reference.hostname}${reference.pathname.re
       <div><dt>Severity</dt><dd><span class={`sev ${d.severity}`}>{d.severity}</span></dd></div>
       {d.cvss && d.cvss.length > 0 && (
         <div><dt>CVSS</dt><dd><ul class="cvss">{d.cvss.map((c) => (
-          <li><span class="cvss-score">{c.score.toFixed(1)}</span> <span class="cvss-label">{c.cve ? `${c.cve} · ` : ''}v{c.version}</span><span class="cvss-vector mono">{c.vector}</span></li>
+          <li><span class="cvss-score">{c.score.toFixed(1)}</span> <span class="cvss-label">{c.cve && <><span class="mono">{c.cve}</span> · </>}v{c.version}</span><span class="cvss-vector mono">{c.vector}</span></li>
         ))}</ul></dd></div>
       )}
       {ids.length > 0 && <div><dt>{ids.length === 1 ? 'Identifier' : 'Identifiers'}</dt><dd class="mono">{ids.map((id, i) => <>{i > 0 && ', '}<span class="nowrap">{id}</span></>)}</dd></div>}
