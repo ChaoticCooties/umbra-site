@@ -5,26 +5,17 @@ primary_target: "src/pages/index.astro"
 related_targets: ["src/pages/about.astro","src/pages/advisories/[...slug].astro"]
 ---
 
-# Umbra redesign
+# Umbra redesign: disclosure list archive
 
-Scope: index, About, advisory reader, shared navigation and footer. Mode: Read.
-User confirmed dark mode and research/rigor first. Other visual choices are open.
-Direction: signal-analysis publication (candidate 5, seed c1bdc09a). Flat monochrome structure; genuine severity colors. Catalog alternatives were weighed for research legibility; spatial sculpture, iridescence and transport materials add no product clarity.
-Composition: B, .impeccable/mocks/umbra-b.png, selected by agent from authorized full overhaul pending optional user preference. No explicit comp approval claimed. All generated copy is discarded in favor of original Markdown/frontmatter.
-Desktop: horizontal navigation, split introductory headline/prose, restrained geometric signal rays at right, wide four-column advisory rows, direct policy link and compact footer.
-Mobile: headings and summaries stack in document order; dates, identifiers and severity remain visible. Local document navigation becomes in-flow.
-About: visible mandate, disclosure policy, three real team members. Public contact links and email addresses are explicitly omitted at the user’s request.
-Advisory: breadcrumb, title/abstract, facts, generated contents list, technical body. Exactly one main landmark.
+Scope: index, advisory pages, About, shared header and footer. Mode: Read. Code-led.
+User brief (2026-10-28): the previous world felt too loud; let the vulnerabilities do the talking. Dark only. Avoid corporate security vendor looks and anything flashy.
+Chosen card: IMPECCABLE'S PICK, Disclosure List Archive (sketch `.impeccable/mocks/decision/model-pick.html`).
 
-## Fidelity / media inventory
-- Wordmark: semantic text with existing public/umbra.png mark; padded raster cropped by a CSS viewport.
-- Display: self-hosted Barlow Condensed semibold, 52–96px headings; body Barlow 17–21px.
-- Signal diagram: flat countable geometric SVG arcs/rays, decorative and aria-hidden; no charts or invented readings.
-- Main action: whole advisory row is a native link; Read advisory label and SVG arrow at far right.
-- Sections: open surfaces and 1px gray rules, no cards, texture or elevation.
-- Metadata: source frontmatter, severity in readable text and color, monospace only identifiers/dates/code.
-- Motion: SVG ray clip reveal once, no content hidden; reduced-motion opt-out.
-- Fonts: public/fonts, original SIL licenses alongside.
-- No produced bitmap assets needed; independent asset review confirmed.
+## Direction contract
 
-Validation: production build, 4 viewport widths × all routes, screenshot inspection desktop/mobile, keyboard skip link, generated contents anchors, internal links, no draft routes, reduced motion. Native GUI review unavailable because computer-use permission is not granted; headless build verification is separate.
+THESIS: The ledger as the archive researchers already read: a dated register of advisories, each one a well-set post. Refuses the hero, big display type, and the vendor advisory table with filters and pills.
+OWN-WORLD: Near-black #0d0e0f ground, warm off-white #dcdad5 text, muted #8f8d88, 1px #26282a rules. Source Sans 3 400/600 for all text; JetBrains Mono only for dates, identifiers, and code. Severity is a 7px square mark beside the word, never a fill or badge. No cards, shadows, gradients, or condensed display type.
+STORY: A reader sees what Umbra has disclosed, newest first, with date, severity, subject, and identifier in one scan. They open a post, read its header block, then the write-up, and move to the previous or next advisory.
+FIRST VIEWPORT: Thin header (mark, Project Umbra, Archive, About). H1 "Disclosure archive" at about 30px with one sentence under it. A year line "2026 · 3 advisories", then a ruled register: Date | Severity | Subject with a one-line summary | Identifier. The whole row is the link.
+FORM: Disclosure List Archive, my top-ranked grounded candidate (1 of 7), chosen as the pick card. seed:663ee797c63355f3
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

@@ -1,63 +1,39 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Arrow from '../components/Arrow.astro';
-const advisories = (await getCollection('advisories'))
-  .filter((entry) => entry.data.status === 'Disclosed')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const [latest, ...earlier] = advisories;
-const fmt = (d: Date) => d.toISOString().slice(0, 10);
-const ids = (a: (typeof advisories)[number]) => (a.data.cve ?? a.data.identifier ?? '').split(/,\s*/).filter(Boolean);
-const target = (a: (typeof advisories)[number]) => `${a.data.vendor}${a.data.product ? ` / ${a.data.product}` : ''}`;
+import { disclosedAdvisories, identifiers, isoDate, leadSentence } from '../lib/advisories';
+
+const advisories = await disclosedAdvisories();
+const years = [...new Set(advisories.map((a) => a.data.date.getUTCFullYear()))];
 ---
-<Base title="Project Umbra — Disclosures">
+<Base title="Project Umbra — Disclosure archive">
   <div class="wrap">
-    <h1 class="sr-only">Project Umbra disclosures</h1>
-    {latest ? (
-      <article class="feature">
-        <a class="feature-link" href={`/advisories/${latest.slug}`} aria-labelledby={`title-${latest.slug}`}>
-          <h2 id={`title-${latest.slug}`} class="feature-title">{latest.data.title}</h2>
-          <div class="feature-body">
-            <div class="feature-summary">
-              <p>{latest.data.summary}</p>
-              <span class="feature-action">Read advisory <Arrow /></span>
-            </div>
-            <dl class="feature-facts">
-              <div><dt>Target</dt><dd>{target(latest)}</dd></div>
-              <div><dt>Severity</dt><dd class={`severity ${latest.data.severity}`}>{latest.data.severity}</dd></div>
-              {(latest.data.cve ?? latest.data.identifier) && <div><dt>Identifier</dt><dd class="identifier">{ids(latest).map((id, i) => <>{i > 0 && ', '}<span>{id}</span></>)}</dd></div>}
-              <div><dt>Published</dt><dd><time datetime={fmt(latest.data.date)}>{fmt(latest.data.date)}</time></dd></div>
-            </dl>
-          </div>
-        </a>
-      </article>
-    ) : (
-      <p class="empty-state">No public advisories yet. Findings appear here once disclosure is coordinated.</p>
-    )}
-    {earlier.length > 0 && (
-      <section class="disclosures" aria-labelledby="earlier-title">
-        <header class="column-heads">
-          <h2 id="earlier-title">Earlier advisories</h2>
-          <span aria-hidden="true">Summary</span>
-          <span aria-hidden="true">Published</span>
-        </header>
-        <div class="research-list">
-          {earlier.map((a) => (
-            <article class="research-record">
-              <a class="research-link" href={`/advisories/${a.slug}`} aria-labelledby={`title-${a.slug}`}>
-                <div class="record-title"><h3 id={`title-${a.slug}`}>{a.data.title}</h3><span class="record-target">{target(a)}</span></div>
-                <div class="record-summary"><p>{a.data.summary}</p><span class="identifier">{ids(a).length ? ids(a).map((id, i) => <>{i > 0 && ', '}<span>{id}</span></>) : a.data.class}</span></div>
-                <div class="record-meta"><time datetime={fmt(a.data.date)}>{fmt(a.data.date)}</time><span class={`severity ${a.data.severity}`}>{a.data.severity}<span class="sr-only"> severity</span></span></div>
-                <span class="record-action">Read advisory <Arrow /></span>
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-    )}
-    <div class="ledger-end">
-      <p>Project Umbra is an AI security experiment. Each advisory is published after the vendor has had a chance to fix it.</p>
-      <a class="text-link" href="/about#policy">Disclosure policy <Arrow /></a>
-    </div>
+    <header class="page-head">
+      <h1>Disclosure archive</h1>
+      <p>Advisories from Project Umbra, an AI security experiment. Each one is published after the vendor has had a chance to fix the issue. <a href="/about#policy">Disclosure policy</a></p>
+    </header>
+    {advisories.length === 0 && <p class="empty">No advisories are public yet. Each one appears here after its disclosure is coordinated.</p>}
+    {years.map((year) => {
+      const rows = advisories.filter((a) => a.data.date.getUTCFullYear() === year);
+      return (
+        <section class="year" aria-labelledby={`year-${year}`}>
+          <h2 class="year-line" id={`year-${year}`}>{year} · {rows.length} {rows.length === 1 ? 'advisory' : 'advisories'}</h2>
+          <table class="register">
+            <thead>
+              <tr><th class="c-date" scope="col">Date</th><th class="c-sev" scope="col">Severity</th><th scope="col">Subject</th><th class="c-id" scope="col">Identifier</th></tr>
+            </thead>
+            <tbody>
+              {rows.map((a) => (
+                <tr>
+                  <td class="r-date"><time datetime={isoDate(a.data.date)}>{isoDate(a.data.date)}</time></td>
+                  <td class="r-sev"><span class={`sev ${a.data.severity}`}>{a.data.severity}</span></td>
+                  <td class="r-subject"><a href={`/advisories/${a.slug}`}>{a.data.title}</a><p>{a.data.lede ?? leadSentence(a.data.summary)}</p></td>
+                  <td class="r-id">{identifiers(a).length ? identifiers(a).map((id) => <span class="mono">{id}</span>) : <span>{a.data.class}</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      );
+    })}
   </div>
 </Base>

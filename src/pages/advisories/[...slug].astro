@@ -1,42 +1,58 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
+import SectionNav from '../../components/SectionNav.astro';
+import { disclosedAdvisories, identifiers, isoDate, target, type Advisory } from '../../lib/advisories';
+
 export async function getStaticPaths() {
-  const advisories = (await getCollection('advisories')).filter((entry) => entry.data.status === 'Disclosed');
-  return advisories.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+  const advisories = await disclosedAdvisories();
+  return advisories.map((entry, i) => ({
+    params: { slug: entry.slug },
+    props: { entry, newer: advisories[i - 1], older: advisories[i + 1] },
+  }));
 }
-type Props = { entry: CollectionEntry<'advisories'> };
-const { entry } = Astro.props as Props;
+type Props = { entry: Advisory; newer?: Advisory; older?: Advisory };
+const { entry, newer, older } = Astro.props as Props;
 const d = entry.data;
 const { Content, headings } = await entry.render();
-const fmt = (x: Date) => x.toISOString().slice(0, 10);
-const recordId = d.cve ?? d.identifier ?? `UMB-${fmt(d.date).replaceAll('-', '')}-${entry.slug.toUpperCase()}`;
+const ids = identifiers(entry);
 const sections = headings.filter((heading) => heading.depth === 2);
+const reference = d.link ? new URL(d.link) : undefined;
+const referenceLabel = reference ? `${reference.hostname}${reference.pathname.replace(/\/$/, '')}` : '';
 ---
 <Base title={`${d.title} — Project Umbra`} description={d.summary}>
-  <article class="wrap advisory-record">
-    <header class="advisory-header">
-      <a class="back-link" href="/"><Arrow direction="left" /> All disclosures</a>
-      <h1>{d.title}</h1>
-      <p class="advisory-abstract">{d.summary}</p>
-      <dl class="advisory-meta">
-        <div><dt>Affected software</dt><dd>{d.vendor}{d.product ? ` / ${d.product}` : ''}</dd></div>
-        <div><dt>Published</dt><dd><time datetime={fmt(d.date)}>{fmt(d.date)}</time></dd></div>
-        <div><dt>Identifier</dt><dd class="identifier">{recordId}</dd></div>
-        <div><dt>Severity</dt><dd class={`severity ${d.severity}`}>{d.severity}</dd></div>
-      </dl>
-    </header>
-    <div class="reading-layout">
-      <aside class="reading-nav advisory-nav" aria-label="Advisory navigation">
-        {sections.length > 0 && <nav aria-label="In this advisory"><p class="nav-title">In this advisory</p>{sections.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}</nav>}
-        <dl class="case-details"><div><dt>Vulnerability class</dt><dd>{d.class}</dd></div><div><dt>Disclosure status</dt><dd>{d.status}</dd></div></dl>
-        {d.link && <a class="text-link external-record" href={d.link} target="_blank" rel="noopener noreferrer">External record <Arrow direction="external" /><span class="sr-only"> (opens in a new tab)</span></a>}
-        <a class="policy-link" href="/about#policy">Our disclosure policy</a>
-      </aside>
-      <div class="prose"><Content /></div>
-    </div>
-    <div class="article-end"><a class="text-link" href="/"><Arrow direction="left" /> Back to disclosures</a></div>
+  <div class="wrap reading">
+  {sections.length > 1 && <SectionNav title="In this advisory" items={sections.map((heading) => ({ href: `#${heading.slug}`, text: heading.text }))} />}
+  <article class="post">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="/"><Arrow direction="left" /> Archive</a></nav>
+    <h1>{d.title}</h1>
+    <dl class="post-head">
+      <div><dt>Date</dt><dd><time datetime={isoDate(d.date)}>{isoDate(d.date)}</time></dd></div>
+      <div><dt>Affected</dt><dd>{target(entry)}</dd></div>
+      <div><dt>Class</dt><dd>{d.class}</dd></div>
+      <div><dt>Severity</dt><dd><span class={`sev ${d.severity}`}>{d.severity}</span></dd></div>
+      {d.cvss && d.cvss.length > 0 && (
+        <div><dt>CVSS</dt><dd><ul class="cvss">{d.cvss.map((c) => (
+          <li><span class="cvss-score">{c.score.toFixed(1)}</span> <span class="cvss-label">{c.cve ? `${c.cve} · ` : ''}v{c.version}</span><span class="cvss-vector mono">{c.vector}</span></li>
+        ))}</ul></dd></div>
+      )}
+      {ids.length > 0 && <div><dt>{ids.length === 1 ? 'Identifier' : 'Identifiers'}</dt><dd class="mono">{ids.map((id, i) => <>{i > 0 && ', '}<span class="nowrap">{id}</span></>)}</dd></div>}
+      {reference && <div><dt>Reference</dt><dd class="mono"><a href={d.link} target="_blank" rel="noopener noreferrer">{referenceLabel}<span class="sr-only"> (opens in a new tab)</span></a></dd></div>}
+    </dl>
+    <p class="post-summary">{d.summary}</p>
+    {sections.length > 1 && (
+      <nav class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">In this advisory</h2>
+        <ol>{sections.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol>
+      </nav>
+    )}
+    <div class="prose"><Content /></div>
+    {(older || newer) && (
+      <nav class="post-nav" aria-label="More advisories">
+        <div>{older && <a href={`/advisories/${older.slug}`}><span><Arrow direction="left" /> Older</span><strong>{older.data.title}</strong></a>}</div>
+        <div class="newer">{newer && <a href={`/advisories/${newer.slug}`}><span>Newer <Arrow /></span><strong>{newer.data.title}</strong></a>}</div>
+      </nav>
+    )}
   </article>
+  </div>
 </Base>

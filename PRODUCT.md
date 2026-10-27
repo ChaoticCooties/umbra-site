@@ -32,7 +32,7 @@ shows only disclosed findings; nothing embargoed reaches the built site.
 
 - Astro static site, deployed to GitHub Pages at `umbra.cooties.io`.
 - Advisories are markdown files in `src/content/advisories/` with validated frontmatter (title, vendor,
-  product, class, severity, status, date, cve/identifier, link, summary).
+  product, class, severity, status, date, cve/identifier, link, summary, and an optional lede).
 - Only `status: Disclosed` entries build. Code blocks in advisories are common.
 - Do not publish a contact email, mailto link, or contact section; the user requested their removal to reduce scraping.
 

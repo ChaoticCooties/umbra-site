@@ -7,6 +7,9 @@ status: "Disclosed"
 date: 2026-02-07
 cve: "CVE-2026-6443"
 link: "https://cooties.io/blog/project-umbra/"
+cvss:
+  - { version: "3.1", score: 9.8, vector: "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H" }
+lede: "A backdoored plugin update adds a public REST endpoint that unserializes attacker-supplied data."
 summary: "Unauthenticated remote code execution. A backdoored plugin update added a public REST endpoint. The endpoint fetches a payload from attacker infrastructure and passes it to unserialize(), which leads to PHP object injection and code execution. CVSS 9.8. Affects every plugin from the compromised account."
 ---
 

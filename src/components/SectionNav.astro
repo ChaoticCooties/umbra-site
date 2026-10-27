@@ -1,0 +1,28 @@
+---
+/** Sticky section list in the left margin of a centered reading column. Hidden below 1240px. */
+type Item = { href: string; text: string };
+const { title, items } = Astro.props as { title: string; items: Item[] };
+---
+<aside class="reading-nav">
+  <nav aria-label={title}>
+    <p class="reading-nav-title">{title}</p>
+    <ol>{items.map((item) => <li><a href={item.href}>{item.text}</a></li>)}</ol>
+  </nav>
+</aside>
+<script is:inline>
+  // Mark the last section heading scrolled past, so the reader keeps their place in long write-ups.
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = [...document.querySelectorAll('.reading-nav a[href^="#"]')];
+    const pairs = links.map((a) => [a, document.getElementById(decodeURIComponent(a.hash.slice(1)))]).filter(([, t]) => t);
+    if (!pairs.length) return;
+    let queued = false;
+    const update = () => {
+      queued = false;
+      let current = pairs[0][0];
+      for (const [a, t] of pairs) if (t.getBoundingClientRect().top <= 120) current = a;
+      for (const [a] of pairs) a === current ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current');
+    };
+    addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  });
+</script>

@@ -8,6 +8,10 @@ status: "Disclosed"
 date: 2026-10-27
 cve: "CVE-2026-117553"
 link: "https://github.com/umbraco/Umbraco-CMS/security/advisories/GHSA-rpv9-qp4c-g469"
+cvss:
+  - { version: "4.0", score: 7.7, vector: "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N" }
+  - { version: "3.1", score: 7.5, vector: "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H" }
+lede: "A forged Host header, an unredacted form_post code, and a Basic auth bypass chain into a stolen admin session."
 summary: "Back-office account takeover that leads to remote code execution. A forged Host header adds an attacker's domain to the back-office sign-in redirect list. A signed-in admin who opens a crafted sign-in link then sends their raw sign-in code to that domain. An HTTP Basic auth header gets the code past the token check. Fixed in 17.7.2 and 18.2.2."
 ---
 
@@ -151,5 +155,3 @@ WHERE ClientId IN ('umbraco-back-office', 'umbraco-swagger')
 - **2026-10-05:** Project Umbra reported the issues to Umbraco.
 - **2026-10-27:** Umbraco released 17.7.2 and 18.2.2 and published [GHSA-rpv9-qp4c-g469](https://github.com/umbraco/Umbraco-CMS/security/advisories/GHSA-rpv9-qp4c-g469).
 - **2026-10-27:** VulnCheck assigned CVE-2026-117553 (CVSS 4.0: 7.7, CVSS 3.1: 7.5).
-
-The CVE record credits Eu Joe Chegne and Damien Wong of Project Umbra as finders. We rate the full chain Critical, because it ends in remote code execution after one administrator click.

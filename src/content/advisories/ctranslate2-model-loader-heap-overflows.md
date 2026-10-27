@@ -8,6 +8,12 @@ status: "Disclosed"
 date: 2026-07-01
 cve: "CVE-2026-102566, CVE-2026-102567"
 link: "https://github.com/OpenNMT/CTranslate2/pull/2068"
+cvss:
+  - { cve: "CVE-2026-102566", version: "4.0", score: 8.5, vector: "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N" }
+  - { cve: "CVE-2026-102566", version: "3.1", score: 7.8, vector: "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H" }
+  - { cve: "CVE-2026-102567", version: "4.0", score: 6.9, vector: "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:L/VI:N/VA:H/SC:N/SI:N/SA:N" }
+  - { cve: "CVE-2026-102567", version: "3.1", score: 6.1, vector: "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:H" }
+lede: "A crafted model file triggers an out-of-bounds read and an out-of-bounds write in the loader."
 summary: "Two heap overflows in CTranslate2's model loader, both reachable by loading a crafted model file. A string field with no null terminator causes an out-of-bounds read. An unchecked tensor length causes an out-of-bounds write. Fixed in CTranslate2 4.8.1 (PR #2068)."
 ---
 

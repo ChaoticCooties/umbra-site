@@ -14,6 +14,10 @@ const advisories = defineCollection({
     identifier: z.string().optional(),
     link: z.string().url().optional(),
     summary: z.string(),
+    lede: z.string().optional(),
+    cvss: z
+      .array(z.object({ cve: z.string().optional(), version: z.string(), score: z.number(), vector: z.string() }))
+      .optional(),
   }),
 });
 

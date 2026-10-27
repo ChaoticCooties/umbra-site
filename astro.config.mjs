@@ -5,5 +5,5 @@ import { accessibleCode } from './src/plugins/accessible-code.mjs';
 export default defineConfig({
   site: 'https://umbra.cooties.io',
   trailingSlash: 'ignore',
-  markdown: { rehypePlugins: [accessibleCode] },
+  markdown: { shikiConfig: { theme: 'css-variables' }, rehypePlugins: [accessibleCode] },
 });

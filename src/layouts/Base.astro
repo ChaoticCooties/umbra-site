@@ -14,7 +14,7 @@ const isAbout = Astro.url.pathname.replace(/\/$/, '') === '/about';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#101112" />
+    <meta name="theme-color" content="#0d0e0f" />
     <meta name="color-scheme" content="dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -32,16 +32,9 @@ const isAbout = Astro.url.pathname.replace(/\/$/, '') === '/about';
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/png" href="/umbra.png" />
-    <link rel="preload" href="/fonts/barlow-condensed-semibold.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="/fonts/barlow-regular.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
-    <!-- THESIS: Disclosed research is the substance; a signal-analysis publication gives evidence space.
-    OWN-WORLD: Charcoal, chalk, condensed Barlow headings, open horizontal research rows, precise SVG rays.
-    STORY: Scan findings, identify the affected software and severity, then read the public record.
-    FIRST VIEWPORT: Compact navigation, split introduction, two research abstracts with dates and identifiers.
-    FORM: Signal-analysis plate, grounded direction 5, seed c1bdc09a. Dark mode and research-first confirmed.
-    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
     <a class="skip-link" href="#main-content">Skip to content</a>
     {!bare && (
       <header class="site-header">
@@ -51,16 +44,18 @@ const isAbout = Astro.url.pathname.replace(/\/$/, '') === '/about';
             <span>Project Umbra</span>
           </a>
           <nav class="site-nav" aria-label="Main navigation">
-            <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : !isAbout ? 'location' : undefined}>Disclosures</a>
+            <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : !isAbout ? 'location' : undefined}>Archive</a>
             <a href="/about" aria-current={isAbout ? 'page' : undefined}>About</a>
           </nav>
         </div>
       </header>
     )}
     <main id="main-content" tabindex="-1"><slot /></main>
-    <footer class="site-footer wrap">
-      <a class="footer-brand" href="/">Project Umbra</a>
-      <nav aria-label="Footer navigation"><a href="/about#policy">Disclosure policy</a><a href="/about#team">Team</a></nav>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <a href="/">Project Umbra</a>
+        <nav aria-label="Footer navigation"><a href="/">Archive</a><a href="/about#policy">Disclosure policy</a><a href="/about#team">Team</a></nav>
+      </div>
     </footer>
   </body>
 </html>

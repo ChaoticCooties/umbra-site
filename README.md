@@ -29,6 +29,7 @@ cve:        string          # optional; shown as the record identifier when pres
 identifier: string          # optional; identifier shown when there is no CVE (e.g. "PR #2068"). Falls back to an auto UMB-… id
 link:       https://...      # optional external advisory / CVE; renders an "External record" link
 summary:  string            # one line, shown in the list
+lede:     string            # optional; one line naming the mechanism, shown in the archive row (falls back to the summary's first sentence)
 ```
 
 The markdown body is the public advisory text.
