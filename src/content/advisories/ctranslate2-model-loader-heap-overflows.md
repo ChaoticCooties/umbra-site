@@ -8,18 +8,23 @@ status: "Disclosed"
 date: 2026-07-01
 cve: "CVE-2026-102566, CVE-2026-102567"
 link: "https://github.com/OpenNMT/CTranslate2/pull/2068"
-summary: "Two heap overflows in CTranslate2's model loader: an out-of-bounds read from a string field with no null terminator, and an out-of-bounds write from a tensor length that is never checked against the buffer size. Both are reachable by loading a crafted model file. Fixed in CTranslate2 4.8.1 (PR #2068)."
+summary: "Two heap overflows in CTranslate2's model loader, both reachable by loading a crafted model file. A string field with no null terminator causes an out-of-bounds read. An unchecked tensor length causes an out-of-bounds write. Fixed in CTranslate2 4.8.1 (PR #2068)."
 ---
 
 ## Overview
 
-CTranslate2 is OpenNMT's inference engine for Transformer models, written in C++. It loads models from a custom binary format, reading fields directly into heap buffers in `Model::load` (`src/models/model.cc`). Length fields in that format are taken from the file and used without validation against the buffers they fill.
+CTranslate2 is OpenNMT's C++ inference engine for Transformer models. Its model loader has two heap overflows, and loading a crafted model file triggers both:
+
+- **CVE-2026-102567:** an out-of-bounds read when a string field has no null terminator.
+- **CVE-2026-102566:** an out-of-bounds write when a tensor's declared length is larger than its buffer.
+
+The bugs affect versions earlier than 4.8.1. To fix them, upgrade to 4.8.1.
+
+Both bugs come from one pattern. `Model::load` (`src/models/model.cc`) reads length fields from the file and uses them without checking them against the buffers they fill.
 
 ## Out-of-bounds read in string deserialization
 
-CVE-2026-102567. Affects CTranslate2 versions earlier than 4.8.1.
-
-`consume<std::string>` reads the string fields in a model file: the spec name and each variable name.
+`consume<std::string>` reads each string field in a model file, such as the spec name and each variable name:
 
 ```cpp
 std::string consume(std::istream& in) {
@@ -31,26 +36,31 @@ std::string consume(std::istream& in) {
 }
 ```
 
-`consume<uint16_t>` reads a 16-bit length prefix. `consume<char>(in, str_length)` allocates `new char[str_length]` and reads that many bytes from the file into it. Those bytes are not guaranteed to contain a null terminator.
+The function works in three steps:
 
-`std::string(const char*)` calls `strlen` on its argument to determine the length, ignoring `str_length`. When the buffer has no null byte, `strlen` reads past the end of the allocation until it reaches one elsewhere on the heap. This is an out-of-bounds read, and the returned string can include heap memory that followed the buffer.
+1. It reads a 16-bit length prefix, `str_length`.
+2. It allocates `str_length` bytes and fills them from the file. Nothing guarantees that those bytes contain a null terminator.
+3. It builds the string with `std::string(c_str)`. That constructor ignores `str_length` and calls `strlen` to find the end.
+
+If the buffer has no null byte, `strlen` reads past the end of the allocation until it finds one elsewhere on the heap. The returned string can include heap memory that followed the buffer.
 
 ## Out-of-bounds write in variable loading
 
-CVE-2026-102566. Affects CTranslate2 versions earlier than 4.8.1.
-
-For each variable, the loader reads a length `num_bytes` from the file and reads that many bytes into the variable's buffer:
+For each variable, `StorageView` allocates a buffer sized from the `shape` and `dtype` in the file. The loader then reads `num_bytes` bytes into that buffer, and `num_bytes` also comes from the file:
 
 ```cpp
 StorageView variable(std::move(shape), dtype);
 consume<char>(model_file, num_bytes, static_cast<char*>(variable.buffer()));
 ```
 
-`variable` is allocated by `StorageView` from `shape` and `dtype`, which are also read from the file. `num_bytes` is never compared to the size of the buffer. A file that declares a small `shape` with a large `num_bytes` writes past the end of the allocation. The length of the write and its contents are both taken from the file.
+The loader never compares `num_bytes` with the buffer size. A file that declares a small `shape` and a large `num_bytes` writes past the end of the allocation. The file controls both the length and the contents of that write.
 
 ## Fix
 
-CTranslate2 4.8.1 includes the fix from PR #2068. The fix passes the known length to the string constructor and rejects a variable whose payload size does not match its buffer:
+CTranslate2 4.8.1 includes the fix from [PR #2068](https://github.com/OpenNMT/CTranslate2/pull/2068). The fix makes two changes:
+
+- It passes `str_length` to the string constructor, so the string no longer depends on a null terminator.
+- It rejects any variable whose payload size doesn't match its buffer.
 
 ```cpp
 std::string str(c_str, str_length);
