@@ -40,7 +40,7 @@ shows only disclosed findings; nothing embargoed reaches the built site.
 
 - Pages: ledger index, per-advisory record, About (mandate, disclosure policy, team).
 - Severity scale: Critical, High, Medium, Low, Info.
-- The ledger has few entries (two at time of writing) and must still look deliberate when small.
+- The ledger has few entries (three at time of writing) and must still look deliberate when small.
 
 ## Brand Commitments
 
@@ -50,9 +50,10 @@ shows only disclosed findings; nothing embargoed reaches the built site.
 
 ## Evidence on Hand
 
-- Two disclosed advisories: CVE-2026-6443 (WordPress EssentialPlugin backdoor, Critical) and
-  CTranslate2 CVE-2026-102566 and CVE-2026-102567 (heap overflows, High;
-  fixed in 4.8.1 by PR #2068).
+- Three disclosed advisories: CVE-2026-6443 (WordPress EssentialPlugin backdoor, Critical),
+  CTranslate2 CVE-2026-102566 and CVE-2026-102567 (heap overflows, High; fixed in 4.8.1 by
+  PR #2068), and CVE-2026-117553 (Umbraco CMS back-office account takeover via Host header
+  poisoning, High; fixed in 17.7.2 and 18.2.2).
 - Team: Eu Joe (model, evals, pipeline), Damien Wong (triage, manual review), Olivier Gagné (triage,
   manual review).
 - No testimonials, press, bounty totals, or client lists exist. Don't fabricate them.
@@ -62,4 +63,4 @@ shows only disclosed findings; nothing embargoed reaches the built site.
 1. The record is the product. Facts first, decoration never competes with them.
 2. Rigor is shown, not claimed: identifiers, dates, fixes, and code carry the credibility.
 3. Nothing embargoed ever ships.
-4. Small is fine. Two entries must read as a curated record, not an empty list.
+4. Small is fine. A handful of entries must read as a curated record, not an empty list.
