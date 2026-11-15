@@ -58,6 +58,7 @@ The public custom domain is `umbraproject.io`:
 - Cloudflare enforces HTTPS for visitors and provides the public certificate. A hostname-scoped
   configuration rule uses **Flexible SSL** for this public static site, as requested: the
   Cloudflare-to-GitHub connection uses HTTP. Keep GitHub Pages **Enforce HTTPS** off to avoid loops.
+  Origin-generated directory redirects are rewritten to HTTPS before reaching the browser.
   The zone default stays **Full (strict)** for future hostnames. No Cloudflare Worker is involved.
 - `gulp.umbraproject.io` is reserved as the intended future ingestion hostname and is not
   configured by this site migration.
