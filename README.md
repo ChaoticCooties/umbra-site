@@ -51,11 +51,14 @@ The public custom domain is `umbraproject.io`:
 - `astro.config.mjs` sets `site: 'https://umbraproject.io'` for canonical and Open Graph URLs.
 - `public/CNAME` names the domain; the GitHub Actions deployment also requires the repository's
   Pages custom-domain setting to be `umbraproject.io`.
-- Cloudflare DNS routes the apex to GitHub Pages. `www.umbraproject.io` redirects to the apex.
+- Cloudflare proxies apex and `www` CNAME records to `chaoticcooties.github.io`.
+  `www.umbraproject.io` redirects to the apex.
 - `umbra.cooties.io` is a Cloudflare-proxied redirect to the same path and query string at
   `https://umbraproject.io`, using a permanent 301.
-- HTTPS is required on the public site. Keep Cloudflare origin validation on Full (strict)
-  once GitHub's domain certificate is issued; never use Flexible SSL.
+- Cloudflare enforces HTTPS for visitors and provides the public certificate. A hostname-scoped
+  configuration rule uses **Flexible SSL** for this public static site, as requested: the
+  Cloudflare-to-GitHub connection uses HTTP. Keep GitHub Pages **Enforce HTTPS** off to avoid loops.
+  The zone default stays **Full (strict)** for future hostnames. No Cloudflare Worker is involved.
 - `gulp.umbraproject.io` is reserved as the intended future ingestion hostname and is not
   configured by this site migration.
 
