@@ -30,7 +30,7 @@ shows only disclosed findings; nothing embargoed reaches the built site.
 
 ## Operating Context
 
-- Astro static site, deployed to GitHub Pages at `umbra.cooties.io`.
+- Astro static site, deployed to GitHub Pages at `umbraproject.io`.
 - Advisories are markdown files in `src/content/advisories/` with validated frontmatter (title, vendor,
   product, class, severity, status, date, cve/identifier, link, summary, and an optional lede).
 - Only `status: Disclosed` entries build. Code blocks in advisories are common.

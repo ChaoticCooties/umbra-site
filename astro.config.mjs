@@ -3,7 +3,7 @@ import { accessibleCode } from './src/plugins/accessible-code.mjs';
 
 // Project Umbra — static disclosure ledger.
 export default defineConfig({
-  site: 'https://umbra.cooties.io',
+  site: 'https://umbraproject.io',
   trailingSlash: 'ignore',
   markdown: { shikiConfig: { theme: 'css-variables' }, rehypePlugins: [accessibleCode] },
 });

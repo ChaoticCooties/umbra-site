@@ -2,7 +2,7 @@
 
 Static site (Astro) for Project Umbra: a dark research publication with disclosed advisories and an
 About page. Each advisory is a markdown file; the index list and the detail pages are generated from
-them. Deploys to `umbra.cooties.io`.
+them. Deploys to `umbraproject.io`.
 
 ## Run
 
@@ -46,13 +46,18 @@ The markdown body is the public advisory text.
 The workflow at `.github/workflows/pages.yml` builds and deploys every push to `main`.
 Repository Pages settings must use **GitHub Actions** as the source.
 
-The public custom domain is `umbra.cooties.io`:
+The public custom domain is `umbraproject.io`:
 
-- `astro.config.mjs` sets `site: 'https://umbra.cooties.io'`.
-- `public/CNAME` includes the domain in the built artifact.
-- DNS must contain `CNAME umbra -> chaoticcooties.github.io`.
-- Configure the repository Pages custom domain as `umbra.cooties.io`, verify DNS, then enable
-  **Enforce HTTPS** once GitHub provisions the certificate.
+- `astro.config.mjs` sets `site: 'https://umbraproject.io'` for canonical and Open Graph URLs.
+- `public/CNAME` names the domain; the GitHub Actions deployment also requires the repository's
+  Pages custom-domain setting to be `umbraproject.io`.
+- Cloudflare DNS routes the apex to GitHub Pages. `www.umbraproject.io` redirects to the apex.
+- `umbra.cooties.io` is a Cloudflare-proxied redirect to the same path and query string at
+  `https://umbraproject.io`, using a permanent 301.
+- HTTPS is required on the public site. Keep Cloudflare origin validation on Full (strict)
+  once GitHub's domain certificate is issued; never use Flexible SSL.
+- `gulp.umbraproject.io` is reserved as the intended future ingestion hostname and is not
+  configured by this site migration.
 
 ## Design
 
